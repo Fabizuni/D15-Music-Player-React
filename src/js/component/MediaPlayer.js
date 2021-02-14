@@ -20,15 +20,20 @@ export class MediaPlayer extends React.Component {
 			.then(response => response.json())
 			.then(data => {
 				this.setState({ fetchData: data });
+				this.loadSong(this.domain + data[0].url, 0);
 			});
 	}
 
-	playSong(url, index) {
+	loadSong(url, index) {
 		this.setState({
 			currentSong: url,
 			currentIndex: index
 		});
 		this.myAudioRef.current.load();
+	}
+
+	playSong(url, index) {
+		this.loadSong(url, index);
 		this.myAudioRef.current.play();
 	}
 
